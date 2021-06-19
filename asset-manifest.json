@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/linkedin-react/static/css/main.d2501840.chunk.css",
+    "main.js": "/linkedin-react/static/js/main.5eee956b.chunk.js",
+    "main.js.map": "/linkedin-react/static/js/main.5eee956b.chunk.js.map",
+    "runtime-main.js": "/linkedin-react/static/js/runtime-main.ff4c2cc8.js",
+    "runtime-main.js.map": "/linkedin-react/static/js/runtime-main.ff4c2cc8.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/linkedin-react/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.2c4185cf.chunk.js": "/linkedin-react/static/js/2.2c4185cf.chunk.js",
+    "static/js/2.2c4185cf.chunk.js.map": "/linkedin-react/static/js/2.2c4185cf.chunk.js.map",
+    "index.html": "/linkedin-react/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/linkedin-react/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.d2501840.chunk.css.map": "/linkedin-react/static/css/main.d2501840.chunk.css.map",
+    "static/js/2.2c4185cf.chunk.js.LICENSE.txt": "/linkedin-react/static/js/2.2c4185cf.chunk.js.LICENSE.txt",
+    "static/media/LI-Logo.a95afc06.png": "/linkedin-react/static/media/LI-Logo.a95afc06.png",
+    "static/media/hitachi.da3961da.jpg": "/linkedin-react/static/media/hitachi.da3961da.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ff4c2cc8.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.2c4185cf.chunk.js",
+    "static/css/main.d2501840.chunk.css",
+    "static/js/main.5eee956b.chunk.js"
+  ]
+}
