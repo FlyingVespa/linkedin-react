@@ -3,6 +3,8 @@ import { Alert } from "react-bootstrap"
 import "./singlepost.css"
 import { useState } from "react"
 import EditPostModal from "./EditPostModal"
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { Accordion, InputGroup, Col, Row, Button, Image, FormControl } from "react-bootstrap"
 
 const SinglePost = ({ postInfo, onUpdate, userData }) => {
   const [readMore, setReadMore] = useState(false)
@@ -26,6 +28,7 @@ const SinglePost = ({ postInfo, onUpdate, userData }) => {
 
   return (
     <>
+    <Accordion>
       <div className="section-card p-3">
         <div className="d-flex mb-2 single-post">
           <img src={userData?.image || "https://via.placeholder.com/150"} alt="" className="user-picture" />
@@ -64,9 +67,11 @@ const SinglePost = ({ postInfo, onUpdate, userData }) => {
             <div className="reactions">
               <i className="far fa-thumbs-up"> Like</i>
             </div>
+          <Accordion.Toggle as={Button} variant="link" eventKey="1">
             <div className="reactions">
               <i className="far fa-comments "> Comment</i>
             </div>
+          </Accordion.Toggle>
             <div className="reactions">
               <i className="fas fa-share "> Share</i>
             </div>
@@ -74,9 +79,44 @@ const SinglePost = ({ postInfo, onUpdate, userData }) => {
               <i className="fas fa-paper-plane "> Send</i>
             </div>
           </div>
+          <Accordion.Collapse eventKey="1">
+            <Row className="mt-3">
+              <Col xs={2}>
+                <Image className="getPost-comment-img" src="" />
+              </Col>
+              <Col xs={10} className="align-text-bottom">
+                <InputGroup className="mb-3">
+                  <FormControl
+                    className="getPost-commentInput"
+                    aria-label="Text input with checkbox"
+                    placeholder="Add a comment..."
+                  />
+                  <div className="addpostfooterbtn-section d-flex justify-content-between ">
+                    <Button className="addpostfooterbtn mx-1">
+                      <Row>
+                        <Col>
+                          <i className="bi bi-card-image"></i>
+                        </Col>
+                      </Row>
+                    </Button>
+                  </div>
+                  {/* <MediaModal id={props.id} /> */}
+
+                  <Button
+                    className="getPost-commentSend-btn mx-1"
+                    type="submit"
+                    disabled
+                  >
+                    <i className="bi bi-reply"></i>
+                  </Button>
+                </InputGroup>
+              </Col>
+            </Row>
+          </Accordion.Collapse>
         </div>
       </div>
       <EditPostModal show={show} onHide={handleClose} postInfo={postInfo} onUpdate={onUpdate} onDelete={handleDelete} />
+      </Accordion>
     </>
   )
 }

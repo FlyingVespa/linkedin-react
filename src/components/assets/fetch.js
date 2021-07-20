@@ -1,6 +1,11 @@
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGM3MGFkYzI5MTkzMDAwMTU2MGFiOTMiLCJpYXQiOjE2MjM2NTcxODAsImV4cCI6MTYyNDg2Njc4MH0.TYp6DjYVT2X0_VJ1teUGTfeILyeVVOWVkXjn42Vqj7o"
-const MY_ID = "60c70adc291930001560ab93"
+import dotenv from 'dotenv';
+
+dotenv.config()
+ 
+// const  TOKEN  = process.env.REACT_APP_TOKEN;
+// const  MY_ID  = process.env.REACT_APP_MY_ID;
+const  TOKEN  = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGM1MzExZDcwNDBkZjAwMTU4NWM4MDIiLCJpYXQiOjE2MjY3NzE4OTQsImV4cCI6MTYyNzk4MTQ5NH0.qQBwLrP9YhLV6i04gO7-VYpUyY0fHe9U1J9cfptWNi4"
+const  MY_ID  = "60c73bf1291930001560aba3";
 
 // Profiles functions
 export const getProfiles = async callback => {

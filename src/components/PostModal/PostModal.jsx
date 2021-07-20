@@ -14,6 +14,7 @@ const PostModal = ({ show, onHide, onUpdate }) => {
     image: "",
   })
 
+  
   useEffect(() => {
     getProfileById("me", setMyProfile)
   }, [])
