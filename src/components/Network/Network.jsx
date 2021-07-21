@@ -7,6 +7,7 @@ import banner from "./banner.jpg";
 import "./network.css";
 import { XLg } from "react-bootstrap-icons";
 import { Nav } from "react-bootstrap";
+import { getProfiles } from "../assets/fetch";
 import dotenv from "dotenv";
 dotenv.config();
 const NetworkFeed = () => {
@@ -16,23 +17,20 @@ const NetworkFeed = () => {
   const [profiles, setProfiles] = useState([]);
   const getProfile = async () => {
     try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/user/",
-        {
-          method: "GET",
-          headers: {
-            Authorization: token,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      let response = await fetch("http://localhost:4444/users/", {
+        method: "GET",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      });
 
       console.log(response);
 
       let profiles = await response.json();
       console.log(profiles);
 
-      setProfiles(profiles.slice(1).slice(40));
+      setProfiles(profiles);
       console.log("Profiles", profiles);
     } catch (error) {
       console.log(error);

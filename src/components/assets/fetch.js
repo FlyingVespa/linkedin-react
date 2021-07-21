@@ -5,16 +5,11 @@ dotenv.config();
 // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGM1MzExZDcwNDBkZjAwMTU4NWM4MDIiLCJpYXQiOjE2MjY3NzE4OTQsImV4cCI6MTYyNzk4MTQ5NH0.qQBwLrP9YhLV6i04gO7-VYpUyY0fHe9U1J9cfptWNi4";
 const MY_ID = process.env.REACT_APP_MY_ID;
 const ENDPOINT = process.env.REACT_APP_API_URL;
-// const headers = {  headers: {
-//   Authorization: `Bearer ${TOKEN}`,
-// },}
 
 // Profiles functions
 export const getProfiles = async (callback) => {
   try {
-    const response = await fetch(`${ENDPOINT}/users/`, {
-      headers: {},
-    });
+    const response = await fetch(`${ENDPOINT}/users/);
     const data = await response.json();
     callback(data);
   } catch (error) {
@@ -24,9 +19,7 @@ export const getProfiles = async (callback) => {
 
 export const getProfileById = async (id, callback) => {
   try {
-    const response = await fetch(`${ENDPOINT}/users/60f575cb61fa7f2daa893e52`, {
-      headers: {},
-    });
+    const response = await fetch(`${ENDPOINT}/users/60f575cb61fa7f2daa893e52`);
     const data = await response.json();
     callback(data);
   } catch (error) {
