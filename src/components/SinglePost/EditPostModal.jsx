@@ -4,20 +4,33 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { editPost, deletePost } from "../assets/fetch";
 import UploadImage from "../assets/UploadImage";
 
-const EditPostModal = ({ show, onHide, postInfo, onUpdate, onDelete, location, history }) => {
-  const [postDetails, setPostDetails] = useState(null)
-  const [pictureFile, setPictureFile] = useState(null)
+const EditPostModal = ({
+  show,
+  onHide,
+  postInfo,
+  onUpdate,
+  onDelete,
+  location,
+  history,
+}) => {
+  const [postDetails, setPostDetails] = useState(null);
+  const [pictureFile, setPictureFile] = useState(null);
 
-  useEffect(() => setPostDetails({ text: postInfo.text, image: postInfo.image }), [postInfo])
+  useEffect(
+    () => setPostDetails({ text: postInfo.text, image: postInfo.image }),
+    [postInfo]
+  );
 
-  const submitForm = type => {
-    let formData = null
+  const submitForm = (type) => {
+    let formData = null;
     if (pictureFile) {
-      formData = new FormData()
-      formData.append("post", pictureFile)
+      formData = new FormData();
+      formData.append("postImg", pictureFile);
     }
-    type === "edit" ? editPost(postInfo._id, postDetails, formData) : deletePost(postInfo._id)
-  }
+    type === "edit"
+      ? editPost(postInfo._id, postDetails, formData)
+      : deletePost(postInfo._id);
+  };
 
   return (
     <Modal show={show} onHide={onHide}>
@@ -32,13 +45,23 @@ const EditPostModal = ({ show, onHide, postInfo, onUpdate, onDelete, location, h
               as="textarea"
               rows={3}
               value={postDetails?.text}
-              onChange={e => setPostDetails({ ...postDetails, text: e.currentTarget.value })}
+              onChange={(e) =>
+                setPostDetails({ ...postDetails, text: e.currentTarget.value })
+              }
             />
           </Form.Group>
-          {postDetails?.image && <img src={postDetails.image} alt="post" className="img-fluid" />}
+          {postDetails?.image && (
+            <img src={postDetails.image} alt="post" className="img-fluid" />
+          )}
           <Form.Group>
-            <UploadImage image={postDetails?.image} />{/* replaces Form.Label */}
-            <Form.Control id="file-input" type="file" onChange={e => setPictureFile(e.target.files[0])} className="d-none" />
+            <UploadImage image={postDetails?.image} />
+            {/* replaces Form.Label */}
+            <Form.Control
+              id="file-input"
+              type="file"
+              onChange={(e) => setPictureFile(e.target.files[0])}
+              className="d-none"
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -46,16 +69,16 @@ const EditPostModal = ({ show, onHide, postInfo, onUpdate, onDelete, location, h
         <Button
           variant="danger"
           onClick={() => {
-            submitForm("delete")
-            onDelete()
-            onHide()
+            submitForm("delete");
+            onDelete();
+            onHide();
             setTimeout(() => {
               if (location.pathname.includes("post")) {
-                history.goBack()
+                history.goBack();
               } else {
-                onUpdate()
+                onUpdate();
               }
-            }, 2000)
+            }, 2000);
           }}
         >
           Delete
@@ -63,15 +86,15 @@ const EditPostModal = ({ show, onHide, postInfo, onUpdate, onDelete, location, h
         <Button
           variant="primary"
           onClick={() => {
-            submitForm("edit")
-            setTimeout(() => onUpdate(), 2000)
-            onHide()
+            submitForm("edit");
+            setTimeout(() => onUpdate(), 2000);
+            onHide();
           }}
         >
           Save
         </Button>
       </Modal.Footer>
     </Modal>
-  )
-}
-export default withRouter(EditPostModal)
+  );
+};
+export default withRouter(EditPostModal);

@@ -51,7 +51,9 @@ const SinglePost = ({ postInfo, onUpdate, userData }) => {
           <div className="d-flex mb-2 single-post">
             <img src={userData.image} alt="" className="user-picture" />
             <div className="ml-3">
-              <p>{postInfo.username}</p>
+              <p>
+                {userData.name} {userData.surname}
+              </p>
               <span className="text">
                 <p>12k followers</p>
                 <div className="d-flex justify-content-start">
