@@ -17,7 +17,7 @@ const NetworkFeed = () => {
   const getProfile = async () => {
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/",
+        "https://striveschool-api.herokuapp.com/api/user/",
         {
           method: "GET",
           headers: {
@@ -76,10 +76,7 @@ const NetworkFeed = () => {
                     <Card.Text className="networkFeed">
                       <p>{profile.title}</p>
                     </Card.Text>
-                    <Nav.Link
-                      href={`/profile/${profile._id}`}
-                      id="sidebar_person"
-                    >
+                    <Nav.Link href={`/user/${profile._id}`} id="sidebar_person">
                       <Button className="networkFeedButton">Connect</Button>
                     </Nav.Link>
                   </Card.Body>
