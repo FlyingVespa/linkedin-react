@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const TOKEN = process.env.REACT_APP_TOKEN;
-const MY_ID = process.env.REACT_APP_MY_ID;
+const MY_ID = "60f575cb61fa7f2daa893e52";
 const ENDPOINT = process.env.REACT_APP_API_URL;
 // const TOKEN =
 // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGM1MzExZDcwNDBkZjAwMTU4NWM4MDIiLCJpYXQiOjE2MjY3NzE4OTQsImV4cCI6MTYyNzk4MTQ5NH0.qQBwLrP9YhLV6i04gO7-VYpUyY0fHe9U1J9cfptWNi4";
@@ -15,7 +15,7 @@ const ENDPOINT = process.env.REACT_APP_API_URL;
 // Profiles functions
 export const getProfiles = async (callback) => {
   try {
-    const response = await fetch(`${ENDPOINT}/profile/`, {
+    const response = await fetch(`${ENDPOINT}/users/`, {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
       },
@@ -29,7 +29,7 @@ export const getProfiles = async (callback) => {
 
 export const getProfileById = async (id, callback) => {
   try {
-    const response = await fetch(`${ENDPOINT}/profile/${id}`, {
+    const response = await fetch(`${ENDPOINT}/users/60f575cb61fa7f2daa893e52`, {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
       },
@@ -52,7 +52,7 @@ export const editProfile = async (payload, pictureFile = null) => {
       body: JSON.stringify(payload),
     });
     if (pictureFile) {
-      const imgResponse = await fetch(`${ENDPOINT}/profile/${MY_ID}/picture`, {
+      const imgResponse = await fetch(`${ENDPOINT}/user/${MY_ID}/picture`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${TOKEN}`,
