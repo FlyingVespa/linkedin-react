@@ -1,13 +1,10 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-const TOKEN = process.env.REACT_APP_TOKEN;
-const MY_ID = process.env.REACT_APP_MY_ID;
-const ENDPOINT = process.env.REACT_APP_API_URL;
 // const TOKEN =
 // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGM1MzExZDcwNDBkZjAwMTU4NWM4MDIiLCJpYXQiOjE2MjY3NzE4OTQsImV4cCI6MTYyNzk4MTQ5NH0.qQBwLrP9YhLV6i04gO7-VYpUyY0fHe9U1J9cfptWNi4";
-// const MY_ID = "60c73bf1291930001560aba3";
-
+const MY_ID = process.env.REACT_APP_MY_ID;
+const ENDPOINT = process.env.REACT_APP_API_URL;
 // const headers = {  headers: {
 //   Authorization: `Bearer ${TOKEN}`,
 // },}
@@ -15,10 +12,8 @@ const ENDPOINT = process.env.REACT_APP_API_URL;
 // Profiles functions
 export const getProfiles = async (callback) => {
   try {
-    const response = await fetch(`${ENDPOINT}/profile/`, {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
+    const response = await fetch(`${ENDPOINT}/users/`, {
+      headers: {},
     });
     const data = await response.json();
     callback(data);
@@ -29,10 +24,8 @@ export const getProfiles = async (callback) => {
 
 export const getProfileById = async (id, callback) => {
   try {
-    const response = await fetch(`${ENDPOINT}/profile/${id}`, {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
+    const response = await fetch(`${ENDPOINT}/users/60f575cb61fa7f2daa893e52`, {
+      headers: {},
     });
     const data = await response.json();
     callback(data);
@@ -47,15 +40,15 @@ export const editProfile = async (payload, pictureFile = null) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${TOKEN}`,
+        // Authorization: `Bearer ${TOKEN}`,
       },
       body: JSON.stringify(payload),
     });
     if (pictureFile) {
-      const imgResponse = await fetch(`${ENDPOINT}/profile/${MY_ID}/picture`, {
+      const imgResponse = await fetch(`${ENDPOINT}/user/${MY_ID}/picture`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
+          // Authorization: `Bearer ${TOKEN}`,
         },
         body: pictureFile,
       });
@@ -69,11 +62,11 @@ export const editProfile = async (payload, pictureFile = null) => {
 // Experiences functions
 export const addExperience = async (payload) => {
   try {
-    const response = await fetch(`${ENDPOINT}/profile/${MY_ID}/experiences`, {
+    const response = await fetch(`${ENDPOINT}/user/${MY_ID}/experiences`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${TOKEN}`,
+        // Authorization: `Bearer ${TOKEN}`,
       },
       body: JSON.stringify(payload),
     });
@@ -96,7 +89,7 @@ export const addEditExperience = async (
         method: experienceId ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${TOKEN}`,
+          // Authorization: `Bearer ${TOKEN}`,
         },
         body: JSON.stringify(payload),
       }
@@ -105,11 +98,11 @@ export const addEditExperience = async (
 
     if (pictureFile) {
       const imgResponse = await fetch(
-        `${ENDPOINT}/profile/${MY_ID}/experiences/${data._id}/picture`,
+        `${ENDPOINT}/user/${MY_ID}/experiences/${data._id}/picture`,
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${TOKEN}`,
+            // Authorization: `Bearer ${TOKEN}`,
           },
           body: pictureFile,
         }
@@ -126,7 +119,7 @@ export const getExperiencesById = async (id, callback) => {
   try {
     const response = await fetch(`${ENDPOINT}/users/${userId}/experiences`, {
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        // Authorization: `Bearer ${TOKEN}`,
       },
     });
     const data = await response.json();
@@ -141,7 +134,7 @@ export const deleteExperience = async (experienceId) => {
     await fetch(`${ENDPOINT}/users/${MY_ID}/experiences/${experienceId}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        // Authorization: `Bearer ${TOKEN}`,
       },
     });
   } catch (error) {
@@ -156,7 +149,7 @@ export const addPost = async (textPayload, imgPayload = null) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${TOKEN}`,
+        // Authorization: `Bearer ${TOKEN}`,
       },
       body: JSON.stringify(textPayload),
     });
@@ -166,7 +159,7 @@ export const addPost = async (textPayload, imgPayload = null) => {
       const imgResponse = await fetch(`${ENDPOINT}/posts/${data._id}`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
+          // Authorization: `Bearer ${TOKEN}`,
         },
         body: imgPayload,
       });
@@ -179,13 +172,13 @@ export const addPost = async (textPayload, imgPayload = null) => {
 
 export const getPosts = async (callback) => {
   try {
-    const response = await fetch("${ENDPOINT}/posts/", {
+    const response = await fetch(`${ENDPOINT}/posts/`, {
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        // Authorization: `Bearer ${TOKEN}`,
       },
     });
     const data = await response.json();
-    callback(data);
+    callback(data.posts);
   } catch (error) {
     console.log(error);
   }
@@ -195,7 +188,7 @@ export const getPostById = async (postId, callback) => {
   try {
     const response = await fetch(`${ENDPOINT}/posts/${postId}`, {
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        // Authorization: `Bearer ${TOKEN}`,
       },
     });
     const data = await response.json();
@@ -210,7 +203,7 @@ export const editPost = async (postId, payload, imgFile = null) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${TOKEN}`,
+        // Authorization: `Bearer ${TOKEN}`,
       },
       body: JSON.stringify(payload),
     });
@@ -218,7 +211,7 @@ export const editPost = async (postId, payload, imgFile = null) => {
       const imgResponse = await fetch(`${ENDPOINT}/posts/${postId}`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
+          // Authorization: `Bearer ${TOKEN}`,
         },
         body: imgFile,
       });
@@ -234,7 +227,7 @@ export const deletePost = async (postId) => {
     await fetch(`${ENDPOINT}/posts/${postId}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        // Authorization: `Bearer ${TOKEN}`,
       },
     });
   } catch (error) {
