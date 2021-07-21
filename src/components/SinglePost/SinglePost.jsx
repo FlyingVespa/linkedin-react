@@ -14,13 +14,13 @@ import {
   FormControl,
 } from "react-bootstrap";
 
-import {
-  postLikes,
-  postComments,
-  putComments,
-  getComments,
-  delComments,
-} from "../assets/fetch";
+// import {
+//   postLikes,
+//   postComments,
+//   putComments,
+//   getComments,
+//   delComments,
+// } from "../assets/fetch";
 
 const SinglePost = ({ postInfo, onUpdate, userData }) => {
   const [readMore, setReadMore] = useState(false);
@@ -49,11 +49,7 @@ const SinglePost = ({ postInfo, onUpdate, userData }) => {
       <Accordion>
         <div className="section-card p-3">
           <div className="d-flex mb-2 single-post">
-            <img
-              src={userData?.image || "https://via.placeholder.com/150"}
-              alt=""
-              className="user-picture"
-            />
+            <img src={userData.image} alt="" className="user-picture" />
             <div className="ml-3">
               <p>{postInfo.username}</p>
               <span className="text">
@@ -70,7 +66,7 @@ const SinglePost = ({ postInfo, onUpdate, userData }) => {
                 </div>
               </span>
             </div>
-            {userData?._id === "60c70adc291930001560ab93" && (
+            {userData?._id === "60f575cb61fa7f2daa893e52" && (
               <i className="fas fa-ellipsis-h ml-auto" onClick={handleShow}></i>
             )}
           </div>
