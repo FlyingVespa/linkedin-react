@@ -54,3 +54,27 @@
   cursor: pointer;
   background: rgba(0, 0, 0, 0.1);
 }
+
+.getPost-card {
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+.getPost-img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.getPost-commentInput {
+  border-radius: 20px !important;
+  height: 40px;
+  margin-top: 5px;
+}
+
+.getPost-comment-img {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
