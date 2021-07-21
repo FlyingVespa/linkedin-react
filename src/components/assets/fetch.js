@@ -9,7 +9,7 @@ const ENDPOINT = process.env.REACT_APP_API_URL;
 // Profiles functions
 export const getProfiles = async (callback) => {
   try {
-    const response = await fetch(`${ENDPOINT}/users/);
+    const response = await fetch(`${ENDPOINT}/users/`);
     const data = await response.json();
     callback(data);
   } catch (error) {
@@ -82,7 +82,6 @@ export const addEditExperience = async (
         method: experienceId ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${TOKEN}`,
         },
         body: JSON.stringify(payload),
       }
@@ -91,12 +90,10 @@ export const addEditExperience = async (
 
     if (pictureFile) {
       const imgResponse = await fetch(
-        `${ENDPOINT}/user/${MY_ID}/experiences/${data._id}/picture`,
+        `${ENDPOINT}/users/${MY_ID}/experiences/${data._id}/uploadImage`,
         {
           method: "POST",
-          headers: {
-            // Authorization: `Bearer ${TOKEN}`,
-          },
+          headers: {},
           body: pictureFile,
         }
       );
@@ -138,24 +135,26 @@ export const deleteExperience = async (experienceId) => {
 // Posts functions
 export const addPost = async (textPayload, imgPayload = null) => {
   try {
-    const textResponse = await fetch(`${ENDPOINT}/posts/`, {
+    const textResponse = await fetch(`${ENDPOINT}/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${TOKEN}`,
       },
       body: JSON.stringify(textPayload),
     });
     const data = await textResponse.json();
     console.log(data);
     if (imgPayload) {
-      const imgResponse = await fetch(`${ENDPOINT}/posts/${data._id}`, {
-        method: "POST",
-        headers: {
-          // Authorization: `Bearer ${TOKEN}`,
-        },
-        body: imgPayload,
-      });
+      const imgResponse = await fetch(
+        `${ENDPOINT}/posts/${data._id}/uploadImage`,
+        {
+          method: "POST",
+          headers: {
+            // Authorization: `Bearer ${TOKEN}`,
+          },
+          body: imgPayload,
+        }
+      );
       console.log(imgResponse);
     }
   } catch (error) {
@@ -180,9 +179,7 @@ export const getPosts = async (callback) => {
 export const getPostById = async (postId, callback) => {
   try {
     const response = await fetch(`${ENDPOINT}/posts/${postId}`, {
-      headers: {
-        // Authorization: `Bearer ${TOKEN}`,
-      },
+      headers: {},
     });
     const data = await response.json();
     callback(data);
@@ -196,18 +193,18 @@ export const editPost = async (postId, payload, imgFile = null) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${TOKEN}`,
       },
       body: JSON.stringify(payload),
     });
     if (imgFile) {
-      const imgResponse = await fetch(`${ENDPOINT}/posts/${postId}`, {
-        method: "POST",
-        headers: {
-          // Authorization: `Bearer ${TOKEN}`,
-        },
-        body: imgFile,
-      });
+      const imgResponse = await fetch(
+        `${ENDPOINT}/posts/${postId}/uploadImage`,
+        {
+          method: "POST",
+          headers: {},
+          body: imgFile,
+        }
+      );
       console.log(imgResponse);
     }
   } catch (error) {

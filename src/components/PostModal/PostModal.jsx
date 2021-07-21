@@ -5,28 +5,30 @@ import { useEffect, useState } from "react";
 import "./PostModal.css";
 import UploadImage from "../assets/UploadImage";
 
+const userId = process.env.REACT_APP_MY_ID;
+
 const PostModal = ({ show, onHide, onUpdate }) => {
   const [myProfile, setMyProfile] = useState({});
   const [pictureFile, setPictureFile] = useState(null);
 
   const [data, setData] = useState({
     text: "",
-    image: "",
+    userId: "",
   });
 
   useEffect(() => {
-    getProfileById("60c73bf1291930001560aba3", setMyProfile);
+    getProfileById(userId, setMyProfile);
   }, []);
 
   const getData = (e) => {
-    setData({ text: e.currentTarget.value });
+    setData({ text: e.currentTarget.value, userId: userId });
   };
 
   const handlePost = () => {
     let formData = null;
     if (pictureFile) {
       formData = new FormData();
-      formData.append("post", pictureFile);
+      formData.append("postImg", pictureFile);
     }
     addPost(data, formData);
   };
