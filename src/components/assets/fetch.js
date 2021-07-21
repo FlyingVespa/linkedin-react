@@ -3,12 +3,12 @@ dotenv.config();
 
 const TOKEN = process.env.REACT_APP_TOKEN;
 const MY_ID = process.env.REACT_APP_MY_ID;
-// const ENDPOINT =process.env.REACT_APP_API_URL;
+const ENDPOINT = process.env.REACT_APP_API_URL;
 // const TOKEN =
 // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGM1MzExZDcwNDBkZjAwMTU4NWM4MDIiLCJpYXQiOjE2MjY3NzE4OTQsImV4cCI6MTYyNzk4MTQ5NH0.qQBwLrP9YhLV6i04gO7-VYpUyY0fHe9U1J9cfptWNi4";
 // const MY_ID = "60c73bf1291930001560aba3";
 
-const endpoint = "https://striveschool-api.herokuapp.com/api/";
+const endpoint = "https://striveschool-api.herokuapp.com/api";
 
 // const headers = {  headers: {
 //   Authorization: `Bearer ${TOKEN}`,
@@ -17,11 +17,14 @@ const endpoint = "https://striveschool-api.herokuapp.com/api/";
 // Profiles functions
 export const getProfiles = async (callback) => {
   try {
-    const response = await fetch(`${endpoint}/profile/`, {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    });
+    const response = await fetch(
+      `https://striveschool-api.herokuapp.com/api/profile/`,
+      {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      }
+    );
     const data = await response.json();
     callback(data);
   } catch (error) {
@@ -31,14 +34,11 @@ export const getProfiles = async (callback) => {
 
 export const getProfileById = async (id, callback) => {
   try {
-    const response = await fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-        },
-      }
-    );
+    const response = await fetch(`${ENDPOINT}/profile/${id}`, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
     const data = await response.json();
     callback(data);
   } catch (error) {
@@ -356,15 +356,39 @@ export const deletePost = async (postId) => {
 //   } catch (error) {}
 // };
 
-export const postLikes = async (postId) => {
-  try {
-    const res = await fetch(`${endpoint}/posts/${postId}/likes`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const postLikes = async (postId) => {
+//   try {
+//     const res = await fetch(`${endpoint}/posts/${postId}/like`, {
+//       method: "POST",
+//       headers: {
+//         Authorization: `Bearer ${TOKEN}`,
+//       },
+//       body: { userId },
+//     });
+//     if (res.ok) {
+//       const data = await res.json();
+//       console.log(data);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// export const deleteLikes = async (postId) => {
+//   try {
+//     const res = await fetch(`${endpoint}/posts/${postId}/like`, {
+//       method: "DELETE",
+//       headers: {
+//         Authorization: `Bearer ${TOKEN}`,
+//       },
+//     });
+//     if (res.ok) {
+//       const data = await res.json();
+//       console.log(data);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+//
