@@ -1,38 +1,26 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import {
-  Card,
-  Button,
-  Badge,
-  Modal,
-  Form,
-  DropdownButton,
-  Dropdown,
-  Row,
-  Col,
-  Image,
-} from "react-bootstrap";
-import { CameraFill } from "react-bootstrap-icons";
-import { editProfile } from "../assets/fetch";
-import UploadImage from "../assets/UploadImage";
-import "./HeroSection.css";
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { Card, Button, Badge, Modal, Form, Row, Col, Image } from "react-bootstrap"
+import { CameraFill } from "react-bootstrap-icons"
+import { editProfile } from "../assets/fetch"
+import UploadImage from "../assets/UploadImage"
+import "./HeroSection.css"
 const ENDPOINT = process.env.REACT_APP_API_URL
 
-
-const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
+const HeroSection = ({ profileData, onUpdate, isMe }) => {
   const [pictureFile, setPictureFile] = useState(null)
 
   const [profileSection, setProfileSection] = useState({})
-  const [myExp, setMyExp] = useState({})
+  // const [myExp, setMyExp] = useState({})
 
   useEffect(() => {
     setProfileSection({
       ...profileData,
     })
-    setMyExp({
-      experiences,
-    })
-  }, [profileData, experiences])
+    // setMyExp({
+    //   experiences,
+    // })
+  }, [profileData])
 
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
@@ -42,19 +30,21 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
   const handleCloseContactMe = () => setShowContactMe(false)
   const handleShowContactMe = () => setShowContactMe(true)
 
-  const [showImgUpload, setImgUpload] = useState(false);
-  const handleCloseImgUpload = () => setImgUpload(false);
-  const handleShowImgUpload = () => setImgUpload(true);
+  const [showImgUpload, setImgUpload] = useState(false)
+  const handleCloseImgUpload = () => setImgUpload(false)
+  const handleShowImgUpload = () => setImgUpload(true)
 
   const getProfileSectionData = (property, e) => {
     setProfileSection({ ...profileSection, [property]: e.currentTarget.value })
   }
 
-  const handleSubmit = () => {
-
+  const handleSubmit = e => {
+    e.preventDefault()
     const formData = new FormData()
     formData.append("userImg", pictureFile)
     editProfile(profileSection, profileData._id, formData)
+    handleCloseImgUpload()
+    setTimeout(() => onUpdate(), 2000)
   }
 
   const modalStyle = {
@@ -62,7 +52,7 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
     overflow: "hidden",
     padding: 0,
     borderTop: "grey solid 1px",
-  };
+  }
 
   return (
     <div className="hero-section">
@@ -73,17 +63,8 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
         />
         {/* <i className="fas fa-pen-square"></i> */}
 
-
-        <div
-          className="profile-img-container"
-          style={{ backgroundImage: `url("${profileData.image}")` }}
-        ></div>
-        <CameraFill
-          size={26}
-          id="upload-img-btn"
-          onClick={handleShowImgUpload}
-        />
-
+        <div className="profile-img-container" style={{ backgroundImage: `url("${profileData.image}")` }}></div>
+        {isMe && <CameraFill size={26} id="upload-img-btn" onClick={handleShowImgUpload} />}
       </div>
 
       {isMe ? (
@@ -123,7 +104,6 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
                   <Badge pill variant="light">
                     More
                   </Badge>
-
                 </>
               ) : (
                 <>
@@ -144,15 +124,11 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
 
         <div>
           <div className="card-body work-history">
-            {myExp ? (
-              experiences.slice(-2).map(x => (
-                <div key={x._id} className="mb-2">
-                  <img src={x.image} alt="..." /> {x.company}
-                </div>
-              ))
-            ) : (
-              <></>
-            )}
+            {profileData.experiences.slice(-2).map(x => (
+              <div key={x._id} className="mb-2">
+                <img src={x.image} alt="..." /> {x.company}
+              </div>
+            ))}
           </div>
 
           {/* Contact me modal */}
@@ -236,7 +212,6 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
                   <UploadImage image={profileSection.image} />
 
                   <Form.Control id="file-input" type="file" onChange={e => setPictureFile(e.target.files[0])} className="d-none" />
-
                 </Form.Group>
 
                 <Form.Group>
@@ -257,14 +232,11 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
           </Modal>
 
           <Modal size="lg" show={showImgUpload} onHide={handleCloseImgUpload}>
-            <Form onSubmit={handleSubmit()}>
+            <Form onSubmit={e => handleSubmit(e)}>
               <Modal.Body style={modalStyle} className="bg-dark">
                 <Row className="p-5 text-center">
                   <Col>
-                    <Image
-                      id="jumboProfile_img_update"
-                      src={profileData.image}
-                    />
+                    <Image id="jumboProfile_img_update" src={profileData.image} />
                   </Col>
                 </Row>
               </Modal.Body>
@@ -272,11 +244,7 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
                 <Row className="text-center flex-fill align-items-center">
                   <Col xs={8} className="mt-2">
                     <Form.Group>
-                      <Form.Control
-                        id="file-input"
-                        type="file"
-                        onChange={(e) => setPictureFile(e.target.files[0])}
-                      />
+                      <Form.Control id="file-input" type="file" onChange={e => setPictureFile(e.target.files[0])} />
                     </Form.Group>
                   </Col>
                   <Col xs={4}>

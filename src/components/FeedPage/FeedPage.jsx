@@ -13,7 +13,6 @@ const FeedPage = () => {
   const [posts, setPosts] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   const [wasUpdated, setWasUpdated] = useState(false)
-
   useEffect(() => {
     getProfileById("me", setCurrentUser)
   }, [])

@@ -4,15 +4,16 @@ import SingleEducation from "./SingleEducation"
 import EducationModal from "../ProfilePage/EducationModal/EducationModal"
 import "./education.css"
 
+const details = {
+  institute: "Strive School",
+  course: "Full Stack Web Development",
+  location: "Berlin, Germany",
+  years: "2008-2009",
+}
 const EducationRow = ({ isMe }) => {
   const [show, setShow] = useState(false)
-  const image = "https://media-exp3.licdn.com/dms/image/C4D0BAQFFQIjyDsOK0w/company-logo_200_200/0/1593351903670?e=1632355200&v=beta&t=01RObunrVhJxBy0F7ekd6oGjw551Tn4tOQCol9x7WzA"
-  const [details, setDetails] = useState({
-    institute: "Strive School",
-    course: "Full Stack Web Development",
-    location: "Berlin, Germany",
-    years: "2008-2009",
-  })
+  const image =
+    "https://media-exp3.licdn.com/dms/image/C4D0BAQFFQIjyDsOK0w/company-logo_200_200/0/1593351903670?e=1632355200&v=beta&t=01RObunrVhJxBy0F7ekd6oGjw551Tn4tOQCol9x7WzA"
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -26,8 +27,19 @@ const EducationRow = ({ isMe }) => {
           </button>
         )}
       </div>
-      <SingleEducation isMe={isMe} image={image} institute={details.institute} course={details.course} location={details.location} years={details.years} />
-      <EducationModal show={show} onHide={handleClose} image="https://media-exp3.licdn.com/dms/image/C4D0BAQFFQIjyDsOK0w/company-logo_200_200/0/1593351903670?e=1632355200&v=beta&t=01RObunrVhJxBy0F7ekd6oGjw551Tn4tOQCol9x7WzA" />
+      <SingleEducation
+        isMe={isMe}
+        image={image}
+        institute={details.institute}
+        course={details.course}
+        location={details.location}
+        years={details.years}
+      />
+      <EducationModal
+        show={show}
+        onHide={handleClose}
+        image="https://media-exp3.licdn.com/dms/image/C4D0BAQFFQIjyDsOK0w/company-logo_200_200/0/1593351903670?e=1632355200&v=beta&t=01RObunrVhJxBy0F7ekd6oGjw551Tn4tOQCol9x7WzA"
+      />
     </div>
   )
 }

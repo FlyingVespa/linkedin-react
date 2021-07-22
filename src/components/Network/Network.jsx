@@ -1,12 +1,13 @@
 import React from "react"
 import { Container, Row, Col, Card, Button, Image } from "react-bootstrap"
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import { Avatar } from "@material-ui/core"
 import banner from "./banner.jpg"
 // import "../HomePage/SidebarLeft/SidebarLeft.css";
 import "./network.css"
 import { XLg } from "react-bootstrap-icons"
-import { Nav } from "react-bootstrap"
+
 import { getProfiles } from "../assets/fetch"
 
 const NetworkFeed = () => {
@@ -44,9 +45,9 @@ const NetworkFeed = () => {
                     <Card.Text className="networkFeed">
                       <span>{profile.title}</span>
                     </Card.Text>
-                    <Nav.Link href={`/user/${profile._id}`} id="sidebar_person">
+                    <Link to={`/profile/${profile._id}`} id="sidebar_person">
                       <Button className="networkFeedButton">Connect</Button>
-                    </Nav.Link>
+                    </Link>
                   </Card.Body>
                 </Card>
               </Col>

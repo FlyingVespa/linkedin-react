@@ -3,7 +3,7 @@ import ExperienceModal from "../ProfilePage/ExperienceModal/ExperienceModal"
 import "./experience.css"
 import SingleExperience from "./SingleExperience"
 
-const ExperienceRow = ({ experiencesData, onUpdate, isMe }) => {
+const ExperienceRow = ({ profileData, onUpdate, isMe, currentUser }) => {
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -18,10 +18,17 @@ const ExperienceRow = ({ experiencesData, onUpdate, isMe }) => {
           </button>
         )}
       </div>
-      {experiencesData.map(experience => (
+      {profileData.experiences.map(experience => (
         <SingleExperience key={experience._id} isMe={isMe} experienceData={experience} onUpdate={onUpdate} />
       ))}
-      <ExperienceModal show={show} onHide={handleClose} action="adding" onUpdate={onUpdate} experienceData={null} />
+      <ExperienceModal
+        show={show}
+        onHide={handleClose}
+        currentUser={currentUser}
+        action="adding"
+        onUpdate={onUpdate}
+        experienceData={null}
+      />
     </div>
   )
 }

@@ -16,7 +16,6 @@ export const getProfiles = async callback => {
 
 export const getProfileById = async (id, callback) => {
   try {
-
     const response = await fetch(`${ENDPOINT}/users/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -24,7 +23,6 @@ export const getProfileById = async (id, callback) => {
     })
     const data = await response.json()
     callback(data)
-
   } catch (error) {
     console.log(error)
   }
@@ -32,19 +30,15 @@ export const getProfileById = async (id, callback) => {
 
 export const editProfile = async (payload, id, pictureFile = null) => {
   try {
-
     await fetch(`${ENDPOINT}/users/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem("token")}`,
-
-
       },
       body: JSON.stringify(payload),
     })
     if (pictureFile) {
-
       const imgResponse = await fetch(`${ENDPOINT}/users/${id}/uploadImage`, {
         method: "POST",
         headers: {
@@ -53,7 +47,6 @@ export const editProfile = async (payload, id, pictureFile = null) => {
         body: pictureFile,
       })
       console.log(imgResponse)
-
     }
   } catch (error) {
     console.log(error)
@@ -78,9 +71,9 @@ export const addExperience = async payload => {
   }
 }
 
-export const addEditExperience = async (experienceId = "", payload, pictureFile = null) => {
+export const addEditExperience = async (experienceId = "", payload, id, pictureFile = null) => {
   try {
-    const response = await fetch(`${ENDPOINT}/users/${MY_ID}/experiences/${experienceId}`, {
+    const response = await fetch(`${ENDPOINT}/users/${id}/experiences/${experienceId}`, {
       method: experienceId ? "PUT" : "POST",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +83,7 @@ export const addEditExperience = async (experienceId = "", payload, pictureFile 
     const data = await response.json()
 
     if (pictureFile) {
-      const imgResponse = await fetch(`${ENDPOINT}/users/${MY_ID}/experiences/${data._id}/uploadImage`, {
+      const imgResponse = await fetch(`${ENDPOINT}/users/${id}/experiences/${data._id}/uploadImage`, {
         method: "POST",
         headers: {},
         body: pictureFile,
@@ -103,9 +96,8 @@ export const addEditExperience = async (experienceId = "", payload, pictureFile 
 }
 
 export const getExperiencesById = async (id, callback) => {
-  const userId = id === "me" ? MY_ID : id
   try {
-    const response = await fetch(`${ENDPOINT}/users/${userId}/experiences`, {
+    const response = await fetch(`${ENDPOINT}/users/${id}/experiences`, {
       headers: {
         // Authorization: `Bearer ${TOKEN}`,
       },
@@ -143,16 +135,12 @@ export const addPost = async (textPayload, imgPayload = null) => {
     const data = await textResponse.json()
     console.log(data)
     if (imgPayload) {
-
       const imgResponse = await fetch(`${ENDPOINT}/posts/${data._id}/uploadImage`, {
         method: "POST",
-        headers: {
-      
-        },
+        headers: {},
         body: imgPayload,
       })
       console.log(imgResponse)
-
     }
   } catch (error) {
     console.log(error)
