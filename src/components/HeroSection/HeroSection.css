@@ -183,3 +183,21 @@
   overflow: hidden;
   border: 5px rgb(233, 233, 233) solid;
 }
+
+#more_btn_upload {
+  border-radius: 100px !important;
+}
+
+.hero-section-columns button {
+  border-radius: 30px;
+  font: 20px;
+  padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 5px;
+}
+
+.hero-section-columns .row {
+  margin-left: 1px;
+  margin-bottom: 10px;
+}

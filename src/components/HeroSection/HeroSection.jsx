@@ -114,36 +114,35 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
             <Card.Text>
               {isMe ? (
                 <>
-                  <Badge pill variant="primary">
-                    Open to
-                  </Badge>
-                  <Badge pill variant="light">
-                    Add section
-                  </Badge>
-                  <DropdownButton
-                    id="dropdown-basic-button"
-                    variant="outline-secondary"
-                    title="More"
-                  >
-                    <Dropdown.Item href="#/action-1">
-                      Download CV pdf
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">upload CSV</Dropdown.Item>
-                  </DropdownButton>
-                  <Badge pill variant="light">
-                    More
-                  </Badge>
+                  <Row>
+                    <Button pill variant="primary">
+                      Open to
+                    </Button>
+                    <Button rounder variant="light">
+                      Add section
+                    </Button>
+                    <DropdownButton
+                      id="more_btn_upload"
+                      variant="outline-secondary"
+                      title="More"
+                    >
+                      <Dropdown.Item href="#/action-1">
+                        Download CV pdf
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-2">
+                        upload CSV
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </Row>
                 </>
               ) : (
                 <>
                   <Badge pill variant="primary">
                     Connect
                   </Badge>
-
                   <Badge pill variant="light">
                     <i className="fas fa-lock"></i> Message
                   </Badge>
-
                   <Badge pill variant="light">
                     More
                   </Badge>
