@@ -10,6 +10,7 @@ import ExperienceRow from "../Experience/ExperienceRow"
 import { useState, useEffect } from "react"
 import { getExperiencesById, getPosts, getProfileById } from "../assets/fetch"
 
+
 const ProfilePage = props => {
   const currentUserId = props.match.params.userId
   const [isMe, setIsMe] = useState(false)

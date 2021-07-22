@@ -2,7 +2,7 @@
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
-  color: rgba(0,0,0,0.9);
+  color: rgba(0, 0, 0, 0.9);
   font-size: 16px;
 }
 
@@ -38,7 +38,8 @@
   border: 2px solid white;
 }
 
-.hero-section .spacer, .hero-section .spacer-on-me {
+.hero-section .spacer,
+.hero-section .spacer-on-me {
   height: 7vh;
 }
 
@@ -47,13 +48,13 @@
 }
 
 .hero-section .profile-name {
-  color: rgba(0,0,0,0.9);
+  color: rgba(0, 0, 0, 0.9);
   font-size: 24px;
   margin-bottom: 0;
 }
 
 .hero-section .area {
-  color: rgba(0,0,0,0,6);
+  color: rgba(0, 0, 0, 0, 6);
   font-size: 14px;
 }
 
@@ -79,16 +80,16 @@
 }
 
 .hero-section .badge-primary {
-  background-color: #0073b1; 
+  background-color: #0073b1;
 }
 
 .hero-section .badge-primary:hover {
-  background-color: rgb(0,65,130);
+  background-color: rgb(0, 65, 130);
 }
 
 .hero-section .badge-light {
   background-color: rgba(0, 0, 0, 0);
-  color: rgba(0,0,0,0.6);
+  color: rgba(0, 0, 0, 0.6);
   border: 1px solid gray;
 }
 
@@ -102,7 +103,7 @@
 }
 
 .hero-section .work-history {
-  color: rgba(0,0,0,0,9);
+  color: rgba(0, 0, 0, 0, 9);
   font-size: 14px;
   font-weight: 600;
 }
@@ -113,12 +114,13 @@
 }
 
 .modal-title {
-  color: rgba(0,0,0,0.9);
+  color: rgba(0, 0, 0, 0.9);
   font-size: 20px;
   font-weight: 400;
 }
 
-.contact-modal .fa-linkedin, .contact-modal .fa-envelope {
+.contact-modal .fa-linkedin,
+.contact-modal .fa-envelope {
   font-size: 25px;
 }
 
@@ -141,7 +143,7 @@
 }
 
 #hero-submit {
-  background-color: #0073b1; 
+  background-color: #0073b1;
   border-radius: 160px;
   width: 90px;
   /* height: 30px; */
@@ -152,5 +154,50 @@
 }
 
 #hero-submit:hover {
-  background-color: rgb(0,65,130);
+  background-color: rgb(0, 65, 130);
+}
+
+#upload-img-btn {
+  border: WHITE 2px solid;
+  bottom: -30px;
+  background-color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  left: 25px;
+  position: absolute;
+  z-index: 99;
+  cursor: pointer;
+  color: BLACK;
+  padding: 7px;
+}
+#upload-img-btn:hover {
+  background-color: rgb(192, 192, 192);
+}
+
+#jumboProfile_img_update {
+  border-radius: 50%;
+  height: 15rem;
+  width: 15rem;
+  object-fit: cover;
+  overflow: hidden;
+  border: 5px rgb(233, 233, 233) solid;
+}
+
+#more_btn_upload {
+  border-radius: 100px !important;
+}
+
+.hero-section-columns button {
+  border-radius: 30px;
+  font: 20px;
+  padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 5px;
+}
+
+.hero-section-columns .row {
+  margin-left: 1px;
+  margin-bottom: 10px;
 }

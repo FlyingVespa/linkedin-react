@@ -1,11 +1,23 @@
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { Card, Button, Badge, Modal, Form } from "react-bootstrap"
-import { editProfile } from "../assets/fetch"
-import UploadImage from "../assets/UploadImage"
-import "./HeroSection.css"
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  Card,
+  Button,
+  Badge,
+  Modal,
+  Form,
+  DropdownButton,
+  Dropdown,
+  Row,
+  Col,
+  Image,
+} from "react-bootstrap";
+import { CameraFill } from "react-bootstrap-icons";
+import { editProfile } from "../assets/fetch";
+import UploadImage from "../assets/UploadImage";
+import "./HeroSection.css";
 const ENDPOINT = process.env.REACT_APP_API_URL
+
 
 const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
   const [pictureFile, setPictureFile] = useState(null)
@@ -30,15 +42,27 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
   const handleCloseContactMe = () => setShowContactMe(false)
   const handleShowContactMe = () => setShowContactMe(true)
 
+  const [showImgUpload, setImgUpload] = useState(false);
+  const handleCloseImgUpload = () => setImgUpload(false);
+  const handleShowImgUpload = () => setImgUpload(true);
+
   const getProfileSectionData = (property, e) => {
     setProfileSection({ ...profileSection, [property]: e.currentTarget.value })
   }
 
   const handleSubmit = () => {
+
     const formData = new FormData()
     formData.append("userImg", pictureFile)
     editProfile(profileSection, profileData._id, formData)
   }
+
+  const modalStyle = {
+    // background: "black",
+    overflow: "hidden",
+    padding: 0,
+    borderTop: "grey solid 1px",
+  };
 
   return (
     <div className="hero-section">
@@ -48,7 +72,18 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
           src="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fjosephliu%2Ffiles%2F2019%2F06%2F1-office-1516329_1920-1200x299.jpg"
         />
         {/* <i className="fas fa-pen-square"></i> */}
-        <div className="profile-img-container" style={{ backgroundImage: `url("${profileData.image}")` }}></div>
+
+
+        <div
+          className="profile-img-container"
+          style={{ backgroundImage: `url("${profileData.image}")` }}
+        ></div>
+        <CameraFill
+          size={26}
+          id="upload-img-btn"
+          onClick={handleShowImgUpload}
+        />
+
       </div>
 
       {isMe ? (
@@ -88,17 +123,16 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
                   <Badge pill variant="light">
                     More
                   </Badge>
+
                 </>
               ) : (
                 <>
                   <Badge pill variant="primary">
                     Connect
                   </Badge>
-
                   <Badge pill variant="light">
                     <i className="fas fa-lock"></i> Message
                   </Badge>
-
                   <Badge pill variant="light">
                     More
                   </Badge>
@@ -200,22 +234,9 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
 
                 <Form.Group>
                   <UploadImage image={profileSection.image} />
-                  <Form.Control id="file-input" type="file" onChange={e => setPictureFile(e.target.files[0])} className="d-none" />
-                  {/* <Form.Label>Profile image</Form.Label>
-                  <Form.Control type="file" onChange={e => setPictureFile(e.target.files[0])} /> */}
-                  {/* This should be border-bottom only, with a pencil icon */}
-                  {/* <div className="hero-section-input-form-container">
 
-                    <form
-                      className="mb-1"
-                      onSubmit={e => {
-                        submitImage(e)
-                      }}
-                    >
-                      <input type="file" className="hero-section-input-form" onChange={e => setSelectedFile(e.target.files[0])} />
-                      <Button type="submit" variant="success" className="hero-section-input-button py-0 text-center">submit</Button>
-                    </form>
-                  </div> */}
+                  <Form.Control id="file-input" type="file" onChange={e => setPictureFile(e.target.files[0])} className="d-none" />
+
                 </Form.Group>
 
                 <Form.Group>
@@ -233,6 +254,39 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
                 Save
               </Button>
             </Modal.Body>
+          </Modal>
+
+          <Modal size="lg" show={showImgUpload} onHide={handleCloseImgUpload}>
+            <Form onSubmit={handleSubmit()}>
+              <Modal.Body style={modalStyle} className="bg-dark">
+                <Row className="p-5 text-center">
+                  <Col>
+                    <Image
+                      id="jumboProfile_img_update"
+                      src={profileData.image}
+                    />
+                  </Col>
+                </Row>
+              </Modal.Body>
+              <Modal.Footer className="bg-dark text-white" style={modalStyle}>
+                <Row className="text-center flex-fill align-items-center">
+                  <Col xs={8} className="mt-2">
+                    <Form.Group>
+                      <Form.Control
+                        id="file-input"
+                        type="file"
+                        onChange={(e) => setPictureFile(e.target.files[0])}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={4}>
+                    <Button type="submit" variant="light">
+                      <CameraFill size={26} /> Upload
+                    </Button>
+                  </Col>
+                </Row>
+              </Modal.Footer>
+            </Form>
           </Modal>
         </div>
       </div>

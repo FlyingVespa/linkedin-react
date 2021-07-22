@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button, Form, Spinner } from "react-bootstrap";
+import dotenv from "dotenv";
+dotenv.config();
+
+const ENDPOINT = process.env.REACT_APP_API_URL;
 export default class Register extends Component {
   state = {
     name: "",
     surname: "",
     email: "",
     password: "",
+    title: "",
+    image: "",
+    bio: "",
+    area: "",
     loading: false,
     isError: false,
     errorMessage: "",
@@ -22,7 +30,7 @@ export default class Register extends Component {
     try {
       this.setState({ loading: true });
 
-      const resp = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
+      const resp = await fetch(`${ENDPOINT}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,15 +40,20 @@ export default class Register extends Component {
           password: this.state.password,
           name: this.state.name,
           surname: this.state.surname,
+          area: this.state.area,
+          username: this.state.username,
+          title: this.state.title,
+          bio: this.state.bio,
         }),
       });
       const data = await resp.json();
       console.log(data);
       if (resp.ok) {
-        localStorage.setItem("token", data.token);
+        // localStorage.setItem("token", data.token);
         this.setState({ loading: false });
-        this.props.history.push("/profile/me");
+        this.props.history.push("/login");
       } else {
+        alert("Could not create user");
         console.log(data);
         this.setState({ isError: true, errorMessage: data.error });
       }
@@ -56,21 +69,70 @@ export default class Register extends Component {
           <Col className="" xs={6}>
             <h1>Register</h1>
             <Form onSubmit={this.handleSubmit}>
+              <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      placeholder="Enter name"
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Surname</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="surname"
+                      placeholder="Enter surname"
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Area</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="area"
+                      placeholder="Enter City Location"
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="username"
+                      placeholder="Enter Unique Username"
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
               <Form.Group>
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Job Title</Form.Label>
                 <Form.Control
                   type="text"
-                  name="name"
-                  placeholder="Enter name"
+                  name="title"
+                  placeholder="What is your job title?"
                   onChange={this.handleChange}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Surname</Form.Label>
+                <Form.Label>Bio</Form.Label>
                 <Form.Control
+                  as="textarea"
                   type="text"
-                  name="surname"
-                  placeholder="Enter surname"
+                  name="bio"
+                  placeholder="Describe yourself and what you do"
                   onChange={this.handleChange}
                 />
               </Form.Group>
@@ -86,7 +148,6 @@ export default class Register extends Component {
                   We'll never share your email with anyone else.
                 </Form.Text>
               </Form.Group>
-
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
@@ -104,7 +165,6 @@ export default class Register extends Component {
               {this.state.isError && (
                 <p className="text-danger">{this.state.errorMessage}</p>
               )}
-
               <Button variant="primary" type="submit">
                 Submit
               </Button>

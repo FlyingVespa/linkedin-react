@@ -36,7 +36,9 @@ function App() {
 
         <Route
           path="/profile/:userId"
+
           render={routeProps => (
+
             <>
               <ProfilePage {...routeProps} />
               <Footer />

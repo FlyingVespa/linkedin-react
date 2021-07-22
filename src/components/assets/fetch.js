@@ -16,6 +16,7 @@ export const getProfiles = async callback => {
 
 export const getProfileById = async (id, callback) => {
   try {
+
     const response = await fetch(`${ENDPOINT}/users/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -23,6 +24,7 @@ export const getProfileById = async (id, callback) => {
     })
     const data = await response.json()
     callback(data)
+
   } catch (error) {
     console.log(error)
   }
@@ -30,15 +32,19 @@ export const getProfileById = async (id, callback) => {
 
 export const editProfile = async (payload, id, pictureFile = null) => {
   try {
+
     await fetch(`${ENDPOINT}/users/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem("token")}`,
+
+
       },
       body: JSON.stringify(payload),
     })
     if (pictureFile) {
+
       const imgResponse = await fetch(`${ENDPOINT}/users/${id}/uploadImage`, {
         method: "POST",
         headers: {
@@ -47,6 +53,7 @@ export const editProfile = async (payload, id, pictureFile = null) => {
         body: pictureFile,
       })
       console.log(imgResponse)
+
     }
   } catch (error) {
     console.log(error)
@@ -136,14 +143,16 @@ export const addPost = async (textPayload, imgPayload = null) => {
     const data = await textResponse.json()
     console.log(data)
     if (imgPayload) {
+
       const imgResponse = await fetch(`${ENDPOINT}/posts/${data._id}/uploadImage`, {
         method: "POST",
         headers: {
-          // Authorization: `Bearer ${TOKEN}`,
+      
         },
         body: imgPayload,
       })
       console.log(imgResponse)
+
     }
   } catch (error) {
     console.log(error)
