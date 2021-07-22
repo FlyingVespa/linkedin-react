@@ -19,7 +19,9 @@ export const getProfiles = async (callback) => {
 
 export const getProfileById = async (id, callback) => {
   try {
-    const response = await fetch(`${ENDPOINT}/users/60f575cb61fa7f2daa893e52`);
+    const response = await fetch(
+      `${ENDPOINT}/users/${id === "me" ? "60f575cb61fa7f2daa893e52" : id}`
+    );
     const data = await response.json();
     callback(data);
   } catch (error) {

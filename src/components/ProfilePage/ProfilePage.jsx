@@ -12,7 +12,8 @@ import { getExperiencesById, getPosts, getProfileById } from "../assets/fetch";
 
 const ProfilePage = (props) => {
   const currentUserId = props.match.params.userId;
-  const isMe = currentUserId === "60f575cb61fa7f2daa893e52";
+  const isMe =
+    currentUserId === "me" || currentUserId === "60f575cb61fa7f2daa893e52";
   const [profileData, setProfileData] = useState({});
   const [experiences, setExperiences] = useState([]);
   const [posts, setPosts] = useState(null);
