@@ -50,10 +50,10 @@ export default class Register extends Component {
       console.log(data);
       if (resp.ok) {
         // localStorage.setItem("token", data.token);
-
         this.setState({ loading: false });
         this.props.history.push("/login");
       } else {
+        alert("Could not create user");
         console.log(data);
         this.setState({ isError: true, errorMessage: data.error });
       }
