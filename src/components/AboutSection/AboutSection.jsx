@@ -16,14 +16,6 @@ const AboutSection = ({ profileData, onUpdate, isMe }) => {
   const handleCloseAbout = () => setShowAbout(false)
   const handleShowAbout = () => setShowAbout(true)
 
-  const getAboutSectionData = (property, e) => {
-    setAboutSection({ ...aboutSection, [property]: e.currentTarget.value })
-  }
-
-  const handleSubmitAbout = () => {
-    editProfile(aboutSection)
-  }
-
   // const [seeMore, setSeeMore] = useState(false)
 
   return (
@@ -57,14 +49,19 @@ const AboutSection = ({ profileData, onUpdate, isMe }) => {
             id="about-form"
             onSubmit={e => {
               e.preventDefault()
-              handleSubmitAbout()
+              editProfile(aboutSection, profileData._id)
               onUpdate()
               handleCloseAbout()
             }}
           >
             <Form.Group className="d-inline-block w-100">
               <Form.Label>Summary</Form.Label>
-              <Form.Control as="textarea" rows={5} value={aboutSection.bio} onChange={e => getAboutSectionData("bio", e)} />
+              <Form.Control
+                as="textarea"
+                rows={5}
+                value={aboutSection.bio}
+                onChange={e => setAboutSection({ bio: e.currentTarget.value })}
+              />
             </Form.Group>
             <div className="d-flex justify-content-end">
               <Button variant="primary" type="submit" form="about-form" className="save-btn">

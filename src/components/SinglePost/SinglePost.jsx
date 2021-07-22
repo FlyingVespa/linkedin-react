@@ -1,18 +1,10 @@
-import React from "react";
-import { Alert } from "react-bootstrap";
-import "./singlepost.css";
-import { useState } from "react";
-import EditPostModal from "./EditPostModal";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import {
-  Accordion,
-  InputGroup,
-  Col,
-  Row,
-  Button,
-  Image,
-  FormControl,
-} from "react-bootstrap";
+import React from "react"
+import { Alert } from "react-bootstrap"
+import "./singlepost.css"
+import { useState } from "react"
+import EditPostModal from "./EditPostModal"
+import "bootstrap-icons/font/bootstrap-icons.css"
+import { Accordion, InputGroup, Col, Row, Button, Image, FormControl } from "react-bootstrap"
 
 // import {
 //   postLikes,
@@ -22,27 +14,27 @@ import {
 //   delComments,
 // } from "../assets/fetch";
 
-const SinglePost = ({ postInfo, onUpdate, userData }) => {
-  const [readMore, setReadMore] = useState(false);
-  const [wasDeleted, setWasDeleted] = useState(false);
+const SinglePost = ({ postInfo, onUpdate, userData, currentUser }) => {
+  const [readMore, setReadMore] = useState(false)
+  const [wasDeleted, setWasDeleted] = useState(false)
   // const [like, setLike] = useState(false)
   // const [comment, setComment] = useState(false)
 
   // Modal stuff
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
-  const currentDate = new Date();
-  const timestamp = currentDate.getMinutes();
-  const handleDelete = () => setWasDeleted(true);
+  const currentDate = new Date()
+  const timestamp = currentDate.getMinutes()
+  const handleDelete = () => setWasDeleted(true)
 
   if (wasDeleted)
     return (
       <Alert variant="info" className="my-3">
         Deleting... Stay with me...
       </Alert>
-    );
+    )
 
   return (
     <>
@@ -68,35 +60,24 @@ const SinglePost = ({ postInfo, onUpdate, userData }) => {
                 </div>
               </span>
             </div>
-            {userData?._id === "60f575cb61fa7f2daa893e52" && (
-              <i className="fas fa-ellipsis-h ml-auto" onClick={handleShow}></i>
-            )}
+            {userData?._id === currentUser._id && <i className="fas fa-ellipsis-h ml-auto" onClick={handleShow}></i>}
           </div>
           <div className="post">
             <div>
-              {!readMore && postInfo.text.length > 200
-                ? `${postInfo.text.substring(0, 200)}...`
-                : postInfo.text}
+              {!readMore && postInfo.text.length > 200 ? `${postInfo.text.substring(0, 200)}...` : postInfo.text}
               {postInfo.text.length > 200 && (
                 <div className="read-more-div">
-                  <button
-                    className="read-more"
-                    onClick={() => setReadMore(!readMore)}
-                  >
+                  <button className="read-more" onClick={() => setReadMore(!readMore)}>
                     {readMore ? "show less" : "  read more"}
                   </button>
                 </div>
               )}
             </div>
-            {postInfo.image && (
-              <img className="w-100" src={postInfo.image} alt="post" />
-            )}
+            {postInfo.image && <img className="w-100" src={postInfo.image} alt="post" />}
             <hr />
             <div className="mt-3 d-flex justify-content-between">
               <div className="reactions">
-                <Button className="far fa-thumbs-up">
-                  {/* onClick={()=> setLikes(!Likes)*/} Like
-                </Button>
+                <Button className="far fa-thumbs-up">{/* onClick={()=> setLikes(!Likes)*/} Like</Button>
               </div>
               <Accordion.Toggle as={Button} variant="link" eventKey="1">
                 <div className="reactions">
@@ -114,25 +95,21 @@ const SinglePost = ({ postInfo, onUpdate, userData }) => {
             <Accordion.Collapse eventKey="1">
               <Row className="mt-3">
                 <Col xs={2}>
-                  <Image className="getPost-comment-img" src={userData.image} />
+                  <Image className="getPost-comment-img" src={currentUser.image} />
                 </Col>
                 <Col xs={10} className="align-text-bottom">
                   <InputGroup className="mb-3">
-                    <FormControl
-                      className="getPost-commentInput"
-                      aria-label="Text input with checkbox"
-                      placeholder="Add a comment..."
-                    />
-                    <div className="addpostfooterbtn-section d-flex justify-content-between ">
+                    <FormControl className="getPost-commentInput" aria-label="Text input with checkbox" placeholder="Add a comment..." />
+                    {/* <div className="addpostfooterbtn-section d-flex justify-content-between ">
                       <Button className="addpostfooterbtn mx-1">
                         <Row>
                           <Col>
-                            {/* CREATE A UPLOAD FOR IMAGES... */}
+                            
                             <i className="bi bi-card-image"></i>
                           </Col>
                         </Row>
                       </Button>
-                    </div>
+                    </div> */}
                     {/* <MediaModal id={props.id} /> */}
 
                     <Button
@@ -148,16 +125,10 @@ const SinglePost = ({ postInfo, onUpdate, userData }) => {
             </Accordion.Collapse>
           </div>
         </div>
-        <EditPostModal
-          show={show}
-          onHide={handleClose}
-          postInfo={postInfo}
-          onUpdate={onUpdate}
-          onDelete={handleDelete}
-        />
+        <EditPostModal show={show} onHide={handleClose} postInfo={postInfo} onUpdate={onUpdate} onDelete={handleDelete} />
       </Accordion>
     </>
-  );
-};
+  )
+}
 
-export default SinglePost;
+export default SinglePost

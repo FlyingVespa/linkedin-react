@@ -1,6 +1,6 @@
 import { Row, Col } from "react-bootstrap"
 import { useState, useEffect } from "react"
-import { getPosts } from "../assets/fetch"
+import { getPosts, getProfileById } from "../assets/fetch"
 import FeedPostSection from "../FeedPostSection/FeedPostSection"
 import AddToYourFeed from "./rightSidebar/AddToYourFeed"
 import MostViewedCourses from "./rightSidebar/MostViewedCourses"
@@ -11,7 +11,12 @@ import CommunityCard from "./leftSidebar/CommunityCard"
 
 const FeedPage = () => {
   const [posts, setPosts] = useState([])
+  const [currentUser, setCurrentUser] = useState({})
   const [wasUpdated, setWasUpdated] = useState(false)
+
+  useEffect(() => {
+    getProfileById("me", setCurrentUser)
+  }, [])
 
   useEffect(() => {
     getPosts(setPosts)
@@ -33,7 +38,7 @@ const FeedPage = () => {
           {/* We will need to get our profile data here and pass down to MostViewedCourses for the profile image */}
           <FeedPostSection onUpdate={() => setWasUpdated(true)} />
         </div>
-        <UserPostSection posts={posts} onUpdate={() => setWasUpdated(true)} />
+        <UserPostSection currentUser={currentUser} posts={posts} onUpdate={() => setWasUpdated(true)} />
       </Col>
       <Col className="d-none d-md-block mt-2 px-1" md={4}>
         <div className="section-card p-3">
