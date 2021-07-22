@@ -6,6 +6,9 @@ export default class Register extends Component {
     surname: "",
     email: "",
     password: "",
+    title: "",
+    image: "",
+    bio: "",
     loading: false,
     isError: false,
     errorMessage: "",
@@ -56,21 +59,46 @@ export default class Register extends Component {
           <Col className="" xs={6}>
             <h1>Register</h1>
             <Form onSubmit={this.handleSubmit}>
+              <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      placeholder="Enter name"
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Surname</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="surname"
+                      placeholder="Enter surname"
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
               <Form.Group>
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Job Title</Form.Label>
                 <Form.Control
                   type="text"
                   name="name"
-                  placeholder="Enter name"
+                  placeholder="What is your job title?"
                   onChange={this.handleChange}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Surname</Form.Label>
+                <Form.Label>Bio</Form.Label>
                 <Form.Control
+                  as="textarea"
                   type="text"
-                  name="surname"
-                  placeholder="Enter surname"
+                  name="name"
+                  placeholder="Describe yourself and what you do"
                   onChange={this.handleChange}
                 />
               </Form.Group>
@@ -104,7 +132,6 @@ export default class Register extends Component {
               {this.state.isError && (
                 <p className="text-danger">{this.state.errorMessage}</p>
               )}
-
               <Button variant="primary" type="submit">
                 Submit
               </Button>
