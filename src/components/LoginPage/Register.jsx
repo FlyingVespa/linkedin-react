@@ -49,9 +49,10 @@ export default class Register extends Component {
       const data = await resp.json();
       console.log(data);
       if (resp.ok) {
-        localStorage.setItem("token", data.token);
+        // localStorage.setItem("token", data.token);
+
         this.setState({ loading: false });
-        this.props.history.push("/profile/me");
+        this.props.history.push("/login");
       } else {
         console.log(data);
         this.setState({ isError: true, errorMessage: data.error });
