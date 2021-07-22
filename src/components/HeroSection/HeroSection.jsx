@@ -67,11 +67,11 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
           src="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fjosephliu%2Ffiles%2F2019%2F06%2F1-office-1516329_1920-1200x299.jpg"
         />
         {/* <i className="fas fa-pen-square"></i> */}
+
         <div
           className="profile-img-container"
           style={{ backgroundImage: `url("${profileData.image}")` }}
         ></div>
-
         <CameraFill
           size={26}
           id="upload-img-btn"
@@ -317,23 +317,17 @@ const HeroSection = ({ profileData, experiences, onUpdate, isMe }) => {
                 <Row className="text-center flex-fill align-items-center">
                   <Col xs={8} className="mt-2">
                     <Form.Group>
-                      <Form.Group>
-                        <Form.Control
-                          id="file-input"
-                          type="file"
-                          onChange={(e) => setPictureFile(e.target.files[0])}
-                        />
-                      </Form.Group>
+                      <Form.Control
+                        id="file-input"
+                        type="file"
+                        onChange={(e) => setPictureFile(e.target.files[0])}
+                      />
                     </Form.Group>
                   </Col>
                   <Col xs={4}>
-                    <CameraFill
-                      variant="primary"
-                      type="submit"
-                      id="hero-submit"
-                      form="profile-form"
-                    />
-                    <p>Update Photo</p>
+                    <Button type="submit" variant="light">
+                      <CameraFill size={26} /> Upload
+                    </Button>
                   </Col>
                 </Row>
               </Modal.Footer>

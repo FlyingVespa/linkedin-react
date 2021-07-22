@@ -159,12 +159,12 @@
 
 #upload-img-btn {
   border: WHITE 2px solid;
-  bottom: -40px;
+  bottom: -30px;
   background-color: white;
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  left: 20px;
+  left: 25px;
   position: absolute;
   z-index: 99;
   cursor: pointer;

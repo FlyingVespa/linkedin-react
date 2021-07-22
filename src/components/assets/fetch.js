@@ -31,22 +31,22 @@ export const getProfileById = async (id, callback) => {
 
 export const editProfile = async (payload, pictureFile = null) => {
   try {
-    await fetch(`${ENDPOINT}/users/`, {
+    await fetch(`${ENDPOINT}/users/${MY_ID}/uploadImage`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${TOKEN}`,
       },
       body: JSON.stringify(payload),
     });
     if (pictureFile) {
-      const imgResponse = await fetch(`${ENDPOINT}/user/${MY_ID}/picture`, {
-        method: "POST",
-        headers: {
-          // Authorization: `Bearer ${TOKEN}`,
-        },
-        body: pictureFile,
-      });
+      const imgResponse = await fetch(
+        `${ENDPOINT}/users/${MY_ID}/uploadImage`,
+        {
+          method: "POST",
+          headers: {},
+          body: pictureFile,
+        }
+      );
       console.log(imgResponse);
     }
   } catch (error) {
