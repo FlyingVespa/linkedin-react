@@ -151,9 +151,7 @@ export const addPost = async (textPayload, imgPayload = null) => {
         `${ENDPOINT}/posts/${data._id}/uploadImage`,
         {
           method: "POST",
-          headers: {
-            // Authorization: `Bearer ${TOKEN}`,
-          },
+
           body: imgPayload,
         }
       );
