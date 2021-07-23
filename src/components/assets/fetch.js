@@ -1,6 +1,3 @@
-// const TOKEN =
-// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGM1MzExZDcwNDBkZjAwMTU4NWM4MDIiLCJpYXQiOjE2MjY3NzE4OTQsImV4cCI6MTYyNzk4MTQ5NH0.qQBwLrP9YhLV6i04gO7-VYpUyY0fHe9U1J9cfptWNi4";
-const MY_ID = process.env.REACT_APP_MY_ID
 const ENDPOINT = process.env.REACT_APP_API_URL
 
 // Profiles functions
@@ -54,23 +51,6 @@ export const editProfile = async (payload, id, pictureFile = null) => {
 }
 
 // Experiences functions
-export const addExperience = async payload => {
-  try {
-    const response = await fetch(`${ENDPOINT}/user/${MY_ID}/experiences`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Bearer ${TOKEN}`,
-      },
-      body: JSON.stringify(payload),
-    })
-    const data = await response.json()
-    console.log(data)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 export const addEditExperience = async (experienceId = "", payload, id, pictureFile = null) => {
   try {
     const response = await fetch(`${ENDPOINT}/users/${id}/experiences/${experienceId}`, {
@@ -95,23 +75,9 @@ export const addEditExperience = async (experienceId = "", payload, id, pictureF
   }
 }
 
-export const getExperiencesById = async (id, callback) => {
+export const deleteExperience = async (userId, experienceId) => {
   try {
-    const response = await fetch(`${ENDPOINT}/users/${id}/experiences`, {
-      headers: {
-        // Authorization: `Bearer ${TOKEN}`,
-      },
-    })
-    const data = await response.json()
-    callback(data)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export const deleteExperience = async experienceId => {
-  try {
-    await fetch(`${ENDPOINT}/users/${MY_ID}/experiences/${experienceId}`, {
+    await fetch(`${ENDPOINT}/users/${userId}/experiences/${experienceId}`, {
       method: "DELETE",
       headers: {
         // Authorization: `Bearer ${TOKEN}`,

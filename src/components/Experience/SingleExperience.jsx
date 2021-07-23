@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ExperienceModal from "../ProfilePage/ExperienceModal/ExperienceModal"
 
-const SingleExperience = ({ experienceData, onUpdate, isMe }) => {
+const SingleExperience = ({ experienceData, onUpdate, isMe, currentUser }) => {
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -27,7 +27,14 @@ const SingleExperience = ({ experienceData, onUpdate, isMe }) => {
         <p>{experienceData.description}</p>
         <hr className="my-3" />
       </div>
-      <ExperienceModal show={show} onHide={handleClose} action="editing" onUpdate={onUpdate} experienceData={experienceData} />
+      <ExperienceModal
+        show={show}
+        onHide={handleClose}
+        action="editing"
+        currentUser={currentUser}
+        onUpdate={onUpdate}
+        experienceData={experienceData}
+      />
     </div>
   )
 }

@@ -23,7 +23,7 @@ const ProfilePage = props => {
   }, [])
 
   useEffect(() => {
-    getProfileById(currentUserId, setProfileData)
+    getProfileById(currentUserId === "me" ? currentUser._id : currentUserId, setProfileData)
     getPosts(setPosts)
     setIsMe(currentUser._id === profileData._id)
     setIsRefreshed(false)

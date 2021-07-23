@@ -43,7 +43,7 @@ const HeroSection = ({ profileData, onUpdate, isMe }) => {
     const formData = new FormData()
     formData.append("userImg", pictureFile)
     editProfile(profileSection, profileData._id, formData)
-    handleCloseImgUpload()
+
     setTimeout(() => onUpdate(), 2000)
   }
 
@@ -176,9 +176,7 @@ const HeroSection = ({ profileData, onUpdate, isMe }) => {
               <Form
                 id="profile-form"
                 onSubmit={e => {
-                  e.preventDefault()
-                  handleSubmit()
-                  setTimeout(() => onUpdate(), 2000)
+                  handleSubmit(e)
                   handleClose()
                 }}
               >
@@ -232,7 +230,12 @@ const HeroSection = ({ profileData, onUpdate, isMe }) => {
           </Modal>
 
           <Modal size="lg" show={showImgUpload} onHide={handleCloseImgUpload}>
-            <Form onSubmit={e => handleSubmit(e)}>
+            <Form
+              onSubmit={e => {
+                handleSubmit(e)
+                handleCloseImgUpload()
+              }}
+            >
               <Modal.Body style={modalStyle} className="bg-dark">
                 <Row className="p-5 text-center">
                   <Col>

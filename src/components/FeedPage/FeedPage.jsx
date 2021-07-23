@@ -26,7 +26,7 @@ const FeedPage = () => {
     <Row>
       <Col xs={4} md={3} className="mt-2 px-1">
         <div className="section-card p-0">
-          <MyProfileCard id="me" />
+          <MyProfileCard id={currentUser._id} />
         </div>
         <div className="section-card p-3">
           <CommunityCard />

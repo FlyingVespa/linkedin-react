@@ -19,7 +19,7 @@ const ExperienceRow = ({ profileData, onUpdate, isMe, currentUser }) => {
         )}
       </div>
       {profileData.experiences.map(experience => (
-        <SingleExperience key={experience._id} isMe={isMe} experienceData={experience} onUpdate={onUpdate} />
+        <SingleExperience key={experience._id} isMe={isMe} currentUser={currentUser} experienceData={experience} onUpdate={onUpdate} />
       ))}
       <ExperienceModal
         show={show}

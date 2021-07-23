@@ -17,7 +17,7 @@ const ExperienceModal = ({ show, onHide, action, onUpdate, experienceData, curre
     let formData = null
     if (pictureFile) {
       formData = new FormData()
-      formData.append("experience", pictureFile)
+      formData.append("expImg", pictureFile)
     }
     addEditExperience(experienceData ? experienceData._id : "", formInput, currentUser._id, formData)
     setFormInput({
@@ -32,7 +32,7 @@ const ExperienceModal = ({ show, onHide, action, onUpdate, experienceData, curre
   }
 
   const handleDelete = () => {
-    deleteExperience(experienceData._id)
+    deleteExperience(currentUser._id, experienceData._id)
   }
 
   useEffect(() => {
